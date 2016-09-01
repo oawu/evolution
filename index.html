@@ -38,5 +38,50 @@
   </head>
   <body lang="zh-tw">
 
+    <div id='container'>
+      <h1>Pokémon Go 進化 CP 推測工具</h1>
+    
+      <div id='all'>
+        
+        <div class='left'>
+          <h3 title='快速搜尋'></h3>
+          <div id='conditions'>
+
+            <div class='input'>
+              <label for='search_input'>關鍵字搜尋</label>
+              <input type='input' id='search_input' autofocus placeholder='可以輸入中、英文名稱或編號查詢..' />
+            </div>
+
+            <div id='sort' class='conditions'>
+              <div>排序方式</div>
+              <div class='radios'>
+                <label><input type='radio' name='sort' value='id' /><span></span>編號排序</label>
+                <label><input type='radio' name='sort' value='en' /><span></span>英文字母</label>
+                <label><input type='radio' name='sort' value='cp' /><span></span>最大 CP</label>
+                <label><input type='radio' name='sort' value='his' /><span></span>查詢紀錄</label>
+                <label><input type='radio' name='sort' value='hot' /><span></span>熱門查詢</label>
+              </div>
+            </div>
+
+            <div id='type' class='conditions'>
+              <div>顯示方式</div>
+              <div class='radios'>
+                <label><input type='radio' name='type' value='block' /><span></span>區塊排列</label>
+                <label><input type='radio' name='type' value='img' /><span></span>圖示排列</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class='right'>
+          <h3 title='查詢結果'></h3>
+          <div id="result_pokemons"></div>
+        </div>
+
+        <h3 title='所有精靈' style='margin-top: 35px;'></h3>
+        <div id='pokemons'></div>
+      </div>
+
+    </div>
   </body>
 </html>
