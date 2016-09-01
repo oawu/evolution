@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?j11n9g');
-  src:  url('fonts/icomoon.eot?j11n9g#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?j11n9g') format('truetype'),
-    url('fonts/icomoon.woff?j11n9g') format('woff'),
-    url('fonts/icomoon.svg?j11n9g#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?dh7vgg');
+  src:  url('fonts/icomoon.eot?dh7vgg#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?dh7vgg') format('truetype'),
+    url('fonts/icomoon.woff?dh7vgg') format('woff'),
+    url('fonts/icomoon.svg?dh7vgg#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-pin-alt:before {
+  content: "\e900";
+}
+.icon-user:before {
+  content: "\e902";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-mail-forward:before {
+  content: "\f064";
+}
+.icon-share:before {
+  content: "\f064";
+}
+.icon-github:before {
+  content: "\f09b";
+}
+.icon-android:before {
+  content: "\f17b";
+}
 .icon-arrow-right:before {
   content: "\e095";
 }
@@ -33,7 +54,10 @@
 .icon-arrow-down:before {
   content: "\e097";
 }
-.icon-search:before {
-  content: "\e986";
+.icon-menu:before {
+  content: "\e120";
+}
+.icon-chat-3:before {
+  content: "\e901";
 }
 
