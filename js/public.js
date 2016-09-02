@@ -395,7 +395,24 @@ $(function () {
         if (!(result && result.feed && result.feed.entry && result.feed.entry.length)) return ;
 
         var pokehomes = result.feed.entry.filter (function (t) {
-          return typeof t['gsx$id']['$t'] !== 'undefined' && typeof t['gsx$範圍']['$t'] !== 'undefined' && typeof t['gsx$緯度']['$t'] !== 'undefined' && typeof t['gsx$經度']['$t'] !== 'undefined' && typeof t['gsx$顏色']['$t'] !== 'undefined' && !isNaN (t['gsx$id']['$t']) && !isNaN (t['gsx$範圍']['$t']) && !isNaN (t['gsx$緯度']['$t']) && !isNaN (t['gsx$經度']['$t']) && t['gsx$經度']['$t'] > 21.8 && t['gsx$經度']['$t'] < 25.6 && t['gsx$緯度']['$t'] > 119.1 && t['gsx$緯度']['$t'] < 122.6 && t['gsx$範圍']['$t'] > 10 && t['gsx$範圍']['$t'] < 1000;
+          return typeof t['gsx$id']['$t'] !== 'undefined' &&
+          typeof t['gsx$範圍']['$t'] !== 'undefined' &&
+          typeof t['gsx$緯度']['$t'] !== 'undefined' &&
+          typeof t['gsx$經度']['$t'] !== 'undefined' &&
+          typeof t['gsx$顏色']['$t'] !== 'undefined' &&
+          !isNaN (t['gsx$id']['$t']) &&
+          !isNaN (t['gsx$範圍']['$t']) &&
+          !isNaN (t['gsx$緯度']['$t']) &&
+          !isNaN (t['gsx$經度']['$t']) &&
+          t['gsx$經度']['$t'] > 21.8 &&
+          t['gsx$經度']['$t'] < 25.6 &&
+          t['gsx$緯度']['$t'] > 119.1 &&
+          t['gsx$緯度']['$t'] < 122.6 &&
+          t['gsx$範圍']['$t'] > 10 &&
+          t['gsx$範圍']['$t'] < 1000 &&
+          t['gsx$id']['$t'] > 0 &&
+          t['gsx$id']['$t'] < 152
+                 ;
         }).map (function (t) {
           return {
             id: (t['gsx$id']['$t'] < 99 ? t['gsx$id']['$t'] < 9 ? '00' : '0' : '') + t['gsx$id']['$t'],
