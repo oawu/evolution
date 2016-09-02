@@ -1460,12 +1460,149 @@ body > aside {
     z-index: 1;
   }
 }
+#maps_spreadsheets_link_add_panel {
+
+  .wrapper {
+    top: calc(50% - 200px / 2);
+    left: calc(50% - 450px / 2);
+    width: 450px;
+    height: 200px;
+
+    @media screen and (min-width: 0) and (max-width: #{400px - 1px}) {
+      top: calc(50% - 230px / 2);
+      height: 230px;
+    }
+    h4 {
+      margin: 0;
+      padding: 10px 5px;
+      border-bottom: 1px solid rgba(39, 40, 34, .2);
+      background-color: #f3f3f3;
+      margin-bottom: 20px;
+      @include border-top-radius(3px);
+    }
+    a {
+      @include a;
+    }
+    > a {
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      border-top: 1px solid rgba(39, 40, 34, .1);
+      cursor: pointer;
+    }
+    ul {
+      text-align: left;
+      padding-left: 35px;
+
+      li {
+        a {
+          line-height: 21px;
+        }
+        + li {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+#maps_comments_panel {
+
+  .wrapper {
+    top: calc(50% - 70% / 2);
+    left: calc(50% - 550px / 2);
+    width: 550px;
+    height: 70%;
+
+    > a {
+      @include a;
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      border-top: 1px solid rgba(39, 40, 34, .1);
+      cursor: pointer;
+    }
+    > div {
+      height: calc(100% - 40px);
+      overflow: auto;
+    }
+  }
+}
+
+#maps_spreadsheets_link_add_panel, #maps_comments_panel {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+
+  z-index: 100;
+
+  .cover {
+    content: '';
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    background-color: rgba(39, 40, 34, .5);
+  }
+  .wrapper {
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    border: 1px solid rgba(39, 40, 34, .75);
+    @include opacity(0);
+    @include box-shadow(0 3px 25px rgba(39, 40, 34, .5));
+    @include border-radius(3px);
+    @include transition(opacity .3s);
+    @media screen and (min-width: 0) and (max-width: #{960px - 1px}) {
+      left: 20px;
+      width: calc(100% - 40px);
+    }
+  }
+  &.show {
+    top: 0;
+    .wrapper {
+      @include opacity(1);
+    }
+  }
+}
+#maps_comments {
+  @include button;
+  top: 123px + $headerHeight;
+}
+#maps_spreadsheets_link_add {
+  @include button('pink');
+  top: 80px + $headerHeight;
+}
+#maps_comments, #maps_spreadsheets_link_add {
+  position: absolute;
+  right: 5px;
+
+  z-index: 2;
+  display: none;
+
+  &.show {
+    display: inline-block;
+  }
+}
 #maps_spreadsheets_link {
   @include a;
 
   position: absolute;
-  top: 10px + $headerHeight;
-  right: 10px;
+  top: 5px + $headerHeight;
+  right: 5px;
 
   height: 35px;
   line-height: 35px -2;
@@ -1478,8 +1615,8 @@ body > aside {
 }
 #maps_select {
   position: absolute;
-  top: 50px + $headerHeight;
-  right: 10px;
+  top: 45px + $headerHeight;
+  right: 5px;
   
   border: 1px solid rgba(39, 40, 34, .25);
   padding: 5px 10px;
@@ -1583,6 +1720,7 @@ article {
 
 section {
   display: inline-block;
+  width: 100%;
   text-align: left;
   word-wrap: break-word; 
   word-break: break-word;
@@ -1767,7 +1905,6 @@ section {
   }
 }
 
-
 .pictures {
   @include clearfix();
 
@@ -1936,5 +2073,29 @@ section {
       background-color: rgba(0, 0, 0, 0.5);
       @include overflow-docx3();
     }
+  }
+}
+.pics {
+  display: inline-block;
+  width: 100%;
+}
+.apk {
+  // @include a(1px, true, #d24c41, #d24c41);
+  color: #d24c41;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+  &:hover {
+    color: #d24c41;
+  }
+  &:before {
+    background-color: #d24c41 !important;
+  }
+  // border-bottom-color:  !important;
+}
+#comments {
+  .fb-comments {
+    display: inline-block;
+    width: 100%;
   }
 }

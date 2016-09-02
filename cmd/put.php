@@ -54,7 +54,7 @@ Step::setUploadDirs (array (
     'css' => array ('css'),
     'font' => array ('eot', 'svg', 'ttf', 'woff'),
     'img' => array ('png', 'jpg', 'jpeg', 'gif', 'svg'),
-    '' => array ('html', 'txt')
+    '' => array ('html', 'txt', 'apk')
   ));
 
 

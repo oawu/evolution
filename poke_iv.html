@@ -51,8 +51,8 @@
         <a class='icon-menu'></a>
         <a class='icon-search' href='index.html'>進化查詢</a>
         <a class='icon-pin-alt' href='maps.html'>巢穴地圖</a>
-        <a class='icon-android' href='poke_iv.html'>PokeIV小助手</a>
-        <a class='icon-chat-3 a' href='about.html'>介紹說明</a>
+        <a class='icon-android a' href='poke_iv.html'>PokeIV小助手</a>
+        <a class='icon-chat-3' href='about.html'>介紹說明</a>
         <span></span>
         <span>
           <a class='icon-share' id='share' title='分享至 Facebook'></a>
@@ -62,52 +62,23 @@
     </header>
 
 
-    <div id='container' class='about'>
+    <div id='container' class='about poke_iv'>
       <article>
         <header>
-          <h1><a href='URL_README'>Go Evolution！</a>
+          <h1><a href='URL_README'>PokeIV 小助手</a>
             <div class='fb-like' data-href='http://works.ioa.tw/evolution/' data-send='false' data-layout='button_count' data-action='like' data-show-faces='false' data-share='true'></div>
           </h1>
-          <span><p>就決定是你了，進化吧！</p></span>
+          <span><p>管理 Pokémon 超體貼幫手</p></span>
         </header>
         <section>
-          <p>這是一個 Pokémon Go 進化後 CP 推測工具，可以快速查詢寶可夢進化後的 CP 範圍值，同時藉由網友互助回報而建立的全台寶可夢巢穴位置，讓大家可以查詢各精靈在台灣的分佈，若大家想要共同編輯<a href='https://docs.google.com/spreadsheets/d/1fMYgcbQV0haZcoKTdUYZaoorKaFCl8cFIF0aD4KDpHM/edit#gid=0' target='_blank'>巢穴文件</a>可與<a href='http://www.ioa.tw/' target='_blank'>網站作者</a>聯絡。</p>
-          <p>若要進一步的查詢各精靈的精準數值的話，可以使用 <a href='poke_iv.html' target='_blank'>PokeIV小助手</a> 來協助管理、計算數值，<a href='poke_iv.html' target='_blank'>PokeIV小助手</a> 不僅可以查詢個體值(IV)外，還可以設定快速進化、估算進化值.. 等功能，<a href='poke_iv.html' target='_blank'>PokeIV小助手</a> 同時也修改了被官網軟鎖得疑慮，經不同演算法大大減低風險！</p>
-        </section>
-      </article>
-      
-      <article>
-        <header>
-          <h2>作品分享</h2>
-          <span>取之於網路 • 分享於網路</span>
-        </header>
-        <section>
-          <ul>
-            <li>GitHub：<a href='https://github.com/comdan66/evolution/' target='_blank'>https://github.com/comdan66/evolution/</a></li>
-            <li>Demo：<a href='http://works.ioa.tw/evolution/' target='_blank'>http://works.ioa.tw/evolution/</a></li>
-            <li>更多作品：<a href='http://www.ioa.tw/' target='_blank'>http://www.ioa.tw/</a></li>
-            <li>PokeIV小助手：<a href='poke_iv.html'>http://works.ioa.tw/evolution/poke_iv.html</a></li>
-          </ul>
+          <p><a href='pokemoniv-1.4.apk'>PokeIV小助手</a>是目前最強大的<b>寶可夢訓練家必備的管理工具</b>，可以清楚呈現每隻精靈的個<b>體數值(IV)</b>，並且可以有不同的排列方式，同時可以計算<b>進化後數值</b>(CP、IV)，所以訓練家可以更加快速的取捨精靈。功能中不僅是數據呈現，並且有提供<b>轉換糖果</b>、<b>模擬數據</b>與<b>快速進化</b>..等多項功能，讓玩家在管理上能夠更加快速與便利！</p>
+          <p>先前市面上有很多查詢個體值(IV)的服務都有被鎖帳號的風險，而<a href='pokemoniv-1.4.apk'>PokeIV小助手</a>則是藉由調整程式演算規則來降低被鎖的風險，據目前統計已有 <b>2,500</b> 用戶使用，都尚未有被鎖的紀錄，若您想使用的話，歡迎下載 <a href='pokemoniv-1.4.apk'>PokeIV小助手 APK</a> 吧！</p>
+
+
         </section>
       </article>
       
 
-      <article>
-        <header>
-          <h2>實作說明</h2>
-          <span>公式解說 • 巢穴分享</span>
-        </header>
-        <section>
-          <ul>
-            <li>使用 <a href='https://www.ptt.cc/bbs/PokeMon/index.html' target='_blank'>PTT PokeMon</a> 版文章 - <a href='https://www.ptt.cc/bbs/PokeMon/M.1470508630.A.DF6.html' target='_blank'>菜鳥致新手: CP、等級、IV、...</a> 提及的公式演算。</li>
-            <li>CP 公式：(種族攻擊力 + 個體攻擊力)  ×(種族防禦值 + 個體防禦值)^0.5 × (種族體力值 + 個體體力值)^0.5 × (等級換算值)^2 ÷ 10。</li>
-            <li>由於網頁版不能知曉個體數值，故利用最小 0，與最大 15 計算。</li>
-            <li>估算方式是藉由比率計算，故等級換算值會被互相約分除去，所以有無等級換算值不影響結果。</li>
-            <li>因不知道個體數值，所以只能推算大約結果，而數值也僅供參考喔！不過藉由<a href='http://www.ioa.tw/' target='_blank'>作者</a>自己實測結果，都有落在範圍值內。</li>
-            <li>範圍公式：(進化前CP * 進化前最小CP) / 進化前最小CP 與 (進化前CP * 進化前最大CP) / 進化前最大CP。</li>
-          </ul>
-        </section>
-      </article>
       <article>
         <header>
           <h2>作品聲明</h2>
@@ -115,11 +86,66 @@
         </header>
         <section>
           <ul>
-            <li>本作品授權採用<b>姓名標示─非商業性 3.0 台灣 (CC BY-NC 3.0 TW) 授權</b>，詳見 <a href='https://creativecommons.org/licenses/by-nc/3.0/tw/legalcode' target='_blank'>https://creativecommons.org/licenses/by-nc/3.0/tw/legalcode</a></li>
+            <li>使用非官方授權軟體都有被鎖的風險，使用前請自行評估需求再使用。</li>
           </ul>
         </section>
       </article>
       
+      <article>
+        <header>
+          <h2>安裝方法</h2>
+          <span>動手安裝 APK</span>
+        </header>
+        <section>
+          <ul>
+            <li>本作因為低調分享，故就不在 Google Play 上架，若大家想要安裝，可以藉由 APK 安裝。</li>
+            <li>APK 安裝方式可以參考<a href='https://www.kocpc.com.tw/archives/4231' target='_blank'>此篇</a>，PokeIV小助手 APK 下載請按<a href='pokemoniv-1.4.apk' class='apk'>這裡</a>。</li>
+            <li>目前只提供 Android 版本的 PokeIV小助手，iOS 正在火速開發中，Apple 用戶請再稍待數日。</li>
+            <li>若大家有任何疑慮與想法，歡迎在 APP 中回報給作者，抑或在下面留言，我們會在下一版進行修正喔！</li>
+            <li>最後，大家若是喜歡 <a href='poke_iv.html'>PokeIV小助手</a> 的話，就請幫我們分享給更多訓練家吧！</li>
+          </ul>
+
+
+          <div class='pics'>
+            <div class='pictures n2'>
+
+              <figure class='_i _p' href='poke_iv.html#&gid=1&pid=1&id=0'>
+                <img src='img/app/ic_launcher.jpg' />
+                <figcaption data-description='PokeIV小助手可查詢個體值(IV)，以及快速進化、轉換糖果..等 方便管理寶可夢的功能。'>PokeIV小助手</figcaption>
+              </figure>
+
+              <figure class='_i _p' href='poke_iv.html#&gid=1&pid=2&id=0'>
+                <img src='img/app/1.png' />
+                <figcaption data-description='內容可依據 CP、IV 等排序。'>APP 列表</figcaption>
+              </figure>
+            </div>
+            <div class='pictures n3'>
+
+              <figure class='_i _p' href='poke_iv.html#&gid=1&pid=3&id=0'>
+                <img src='img/app/long_click.png' />
+                <figcaption data-description='玩家可以快速的針對寶可夢進行多項功能。'>功能列表</figcaption>
+              </figure>
+
+              <figure class='_t _p' href='poke_iv.html#&gid=1&pid=4&id=0'>
+                <img src='img/app/main.png' />
+                <figcaption data-description='內容可依據 CP、IV 等排序。'>APP 列表</figcaption>
+              </figure>
+
+              <figure class='_t _p' href='poke_iv.html#&gid=1&pid=5&id=0'>
+                <img src='img/app/detail.png' />
+                <figcaption data-description='可以精準估算能力值、進化值，並且設定相關能力，以及快速進化！'>能力分析</figcaption>
+              </figure>
+
+            </div>
+          </div>
+<br />
+        </section>
+      </article>
+      
+      <div id='comments'>
+        <h3 title='留言討論區'></h3>
+        <div class="fb-comments" width='100%' data-href="http://works.ioa.tw/evolution/" data-numposts="5"></div>
+      </div>
     </div>
     
     <aside>
