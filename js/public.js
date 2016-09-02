@@ -405,6 +405,7 @@ $(function () {
 
 
 
+  $('._apk').click (function () { ga ('send', 'event', 'evolution', 'poke_iv', 'download'); });
 
   $('figure._i').imgLiquid ({verticalAlign: 'center'});
   $('figure._t').imgLiquid ({verticalAlign: 'top'});
