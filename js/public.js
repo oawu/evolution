@@ -170,7 +170,7 @@ $(function () {
       
       if (isNaN (id) || !pokemon) return false;
 
-      window.func.schedulePrompt (function ($input) {
+      window.func.prompt (function ($input) {
           var prompt = $(this).get (0),
               cp = $input.val ();
               prompt.loading ('讀取中..');
@@ -219,58 +219,64 @@ $(function () {
       window.vars.$.pokemons.empty ().append (pokemons);
       window.vars.$.pokemon = window.vars.$.pokemons.find ('> a');
     },
-    schedulePrompt: function (okCallback, title, inputText, noCallback) {
-      window.vars.$.schedulePrompt = $('.schedulePrompt');
+    prompt: function (okCallback, title, inputText, noCallback) {
+      window.vars.$.prompt = $('.prompt');
 
-      this.closeResult = function () { var that = window.vars.$.schedulePrompt.removeClass ('result'); that.get (0).vars.$tip.attr ('title', ''); return that; };
-      this.closeLoading = function () { var that = window.vars.$.schedulePrompt.removeClass ('loading'); that.get (0).vars.$tip.attr ('title', ''); return that; };
+      this.closeResult = function () { var that = window.vars.$.prompt.removeClass ('result'); that.get (0).vars.$tip.attr ('title', ''); return that; };
+      this.closeLoading = function () { var that = window.vars.$.prompt.removeClass ('loading'); that.get (0).vars.$tip.attr ('title', ''); return that; };
       this.loading = function (title) { var that = this.closeResult ().addClass ('loading'); that.get (0).vars.$tip.attr ('title', title); return that; };
       this.result = function (title) { var that = this.closeLoading ().addClass ('result'); that.get (0).vars.$tip.attr ('title', title); return that; };
-      this.okCallback = function (callback) { if (callback) window.vars.$.schedulePrompt.get (0).vars.$ok.unbind ('click').click (callback.bind ($(this), window.vars.$.schedulePrompt.get (0).vars.$input)); };
+      this.okCallback = function (callback) { if (callback) window.vars.$.prompt.get (0).vars.$ok.unbind ('click').click (callback.bind ($(this), window.vars.$.prompt.get (0).vars.$input)); };
       this.close = function () {
-        window.vars.$.schedulePrompt.removeClass ('show_animation').addClass ('hide_animation');
+        window.vars.$.prompt.removeClass ('show_animation').addClass ('hide_animation');
 
-        window.vars.$.schedulePrompt.get (0).vars.timer = setTimeout (function () {
-          window.vars.$.schedulePrompt.attr ('class', 'schedulePrompt');
+        window.vars.$.prompt.get (0).vars.timer = setTimeout (function () {
+          window.vars.$.prompt.attr ('class', 'prompt');
 
-          window.vars.$.schedulePrompt.get (0).vars.$input.val ('');
-          window.vars.$.schedulePrompt.get (0).vars.timer = null;
+          window.vars.$.prompt.get (0).vars.$input.val ('');
+          window.vars.$.prompt.get (0).vars.timer = null;
         }, 500);
       };
 
-      if (window.vars.$.schedulePrompt.length < 1) {
-        window.vars.$.schedulePrompt = $('<div />').addClass ('schedulePrompt').appendTo (window.vars.$.body);
+      if (window.vars.$.prompt.length < 1) {
+        window.vars.$.prompt = $('<div />').addClass ('prompt').appendTo (window.vars.$.body);
 
-        window.vars.$.schedulePrompt.get (0).vars = {
+        window.vars.$.prompt.get (0).vars = {
           $title: $('<div />').addClass ('title'),
-          $input: $('<input />').attr ('type', 'number').attr ('placeholder', '請輸入數字..'),
+          $input: $('<input />').attr ('type', 'number').attr ('placeholder', '請輸入數字..').keyup (function (e) {
+            if (e.keyCode == 13) window.vars.$.prompt.get (0).vars.$ok.click ();
+            if (e.keyCode == 27) window.vars.$.prompt.get (0).vars.$no.click ();
+          }),
           $ok: $('<a />').addClass ('ok').text ('確定'),
           $no: $('<a />').addClass ('no').text ('取消'),
           $tip: $('<div />').addClass ('tip'),
           timer: null,
         };
         
-        window.vars.$.schedulePrompt.append (
+        window.vars.$.prompt.append (
           $('<div />').addClass ('cover').click (this.close)).append (
           $('<div />').addClass ('wrapper').append (
-            window.vars.$.schedulePrompt.get (0).vars.$title).append (
-            window.vars.$.schedulePrompt.get (0).vars.$tip).append (
+            window.vars.$.prompt.get (0).vars.$title).append (
+            window.vars.$.prompt.get (0).vars.$tip).append (
             $('<div />').addClass ('content').append (
-              window.vars.$.schedulePrompt.get (0).vars.$input)).append (
+              window.vars.$.prompt.get (0).vars.$input)).append (
             $('<div />').addClass ('btns').append (
-              window.vars.$.schedulePrompt.get (0).vars.$ok.click (this.close)).append (
-              window.vars.$.schedulePrompt.get (0).vars.$no.click (this.close))));
+              window.vars.$.prompt.get (0).vars.$ok.click (this.close)).append (
+              window.vars.$.prompt.get (0).vars.$no.click (this.close))));
       }
       var $that = $(this);
-      if (window.vars.$.schedulePrompt.get (0).vars.timer) return false;
+      if (window.vars.$.prompt.get (0).vars.timer) return false;
 
-      if (title) window.vars.$.schedulePrompt.get (0).vars.$title.text (title);
-      if (inputText) window.vars.$.schedulePrompt.get (0).vars.$input.val (inputText);
+      if (title) window.vars.$.prompt.get (0).vars.$title.text (title);
+      if (inputText) window.vars.$.prompt.get (0).vars.$input.val (inputText);
 
-      if (okCallback) window.vars.$.schedulePrompt.get (0).vars.$ok.unbind ('click').click (okCallback.bind ($that, window.vars.$.schedulePrompt.get (0).vars.$input));
-      if (noCallback) window.vars.$.schedulePrompt.get (0).vars.$no.unbind ('click').click (noCallback);
-      window.vars.$.schedulePrompt.addClass ('show').addClass ('show_animation');
-      window.vars.$.schedulePrompt.get (0).vars.$input.focus ();
+      if (okCallback) window.vars.$.prompt.get (0).vars.$ok.unbind ('click').click (okCallback.bind ($that, window.vars.$.prompt.get (0).vars.$input));
+      if (noCallback) window.vars.$.prompt.get (0).vars.$no.unbind ('click').click (noCallback);
+      window.vars.$.prompt.addClass ('show').addClass ('show_animation');
+      
+      setTimeout (function () {
+        window.vars.$.prompt.get (0).vars.$input.focus ();
+      }, 600);
     },
     initPhotoSwipeFromDOM: function (gallerySelector, fnx) {
       var openPhotoSwipe = function (index, $pswp, $obj, disableAnimation, fromURL) {

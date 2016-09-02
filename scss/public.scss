@@ -839,7 +839,7 @@ div.radios {
   }
 }
 
-.schedulePrompt {
+.prompt {
   position: fixed;
   top: 0;
   left: 0;
@@ -852,13 +852,13 @@ div.radios {
   &.hide_animation {
     .cover {
       @include opacity(0);
-      @include animation(schedulePromptCoverHide .5s);
+      @include animation(promptCoverHide .5s);
     }
     .wrapper {
       top: -50%;
       @include opacity(0);
 
-      @include animation(schedulePromptWrapperHide .3s);
+      @include animation(promptWrapperHide .3s);
     }
   }
   &.show {
@@ -867,13 +867,13 @@ div.radios {
   &.show_animation {
     .cover {
       @include opacity(1);
-      @include animation(schedulePromptCoverShow .5s);
+      @include animation(promptCoverShow .5s);
     }
     .wrapper {
       top: calc(10%);
       @include opacity(1);
 
-      @include animation(schedulePromptWrapperShow .3s);
+      @include animation(promptWrapperShow .3s);
     }
   }
   &.result {
@@ -1033,19 +1033,19 @@ div.radios {
     }
   }
 }
-@include keyframes(schedulePromptCoverHide) {
+@include keyframes(promptCoverHide) {
   0% { @include opacity(1); }
   100% { @include opacity(0); }
 }
-@include keyframes(schedulePromptWrapperHide) {
+@include keyframes(promptWrapperHide) {
   0% { top: calc(10%); @include opacity(1); }
   100% { top: -50%; @include opacity(0); }
 }
-@include keyframes(schedulePromptCoverShow) {
+@include keyframes(promptCoverShow) {
   0% { @include opacity(0); }
   100% { @include opacity(1); }
 }
-@include keyframes(schedulePromptWrapperShow) {
+@include keyframes(promptWrapperShow) {
   0% { top: -50%; @include opacity(0); }
   100% { top: calc(10%); @include opacity(1); }
 }
