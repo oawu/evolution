@@ -387,13 +387,16 @@ $(function () {
       window.vars.maps = new google.maps.Map (window.vars.$.maps.get (0), { zoom: last.zoom, center: new google.maps.LatLng (last.lat, last.lng), zoomControl: true, scrollwheel: true, scaleControl: true, mapTypeControl: false, navigationControl: true, streetViewControl: false, disableDoubleClickZoom: true});
       window.vars.maps.mapTypes.set ('map_style', new google.maps.StyledMapType ([{stylers: [{gamma: 0.7}, {weight: 1}, {saturation: 10}]}, {featureType: 'administrative', elementType: 'geometry.fill', stylers: [{'visibility': 'simplified', 'color': '#000000'}]}, {featureType: 'administrative', elementType: 'geometry.stroke', stylers: [{'visibility': 'simplified', 'color': '#144b53'},{'lightness': 14},{'weight': 1.4}]}, {featureType: 'all', stylers: [{ visibility: 'on' }]}, {featureType: 'landscape', stylers: [{ visibility: 'on' }]}, {featureType: 'poi', stylers: [{ visibility: 'off' }]}, {featureType: 'road', stylers: [{ visibility: 'simplified' }]}, {featureType: 'road.arterial', stylers: [{ visibility: 'on' }]}, {featureType: 'transit', stylers: [{ visibility: 'simplified' }]}, {featureType: 'water', stylers: [{ color: '#b3d1ff', visibility: 'on' }]}, {elementType: "labels.icon", stylers:[{ visibility: 'off' }]}]));
       window.vars.maps.setMapTypeId ('map_style');
+      
       window.vars.maps.addListener ('idle', function () { window.storages.mapsLast.set ({zoom: window.vars.maps.zoom, lat: window.vars.maps.center.lat (), lng: window.vars.maps.center.lng ()}); });
 
 
       $.when ($.ajax ('https://spreadsheets.google.com/feeds/list/1fMYgcbQV0haZcoKTdUYZaoorKaFCl8cFIF0aD4KDpHM/1/public/values?alt=json' + '&t=' + new Date ().getTime (), {dataType: 'json'})).done (function (result) {
         if (!(result && result.feed && result.feed.entry && result.feed.entry.length)) return ;
 
-        var pokehomes = result.feed.entry.map (function (t) {
+        var pokehomes = result.feed.entry.filter (function (t) {
+          return typeof t['gsx$id']['$t'] !== 'undefined' && typeof t['gsx$範圍']['$t'] !== 'undefined' && typeof t['gsx$緯度']['$t'] !== 'undefined' && typeof t['gsx$經度']['$t'] !== 'undefined' && typeof t['gsx$顏色']['$t'] !== 'undefined' && !isNaN (t['gsx$id']['$t']) && !isNaN (t['gsx$範圍']['$t']) && !isNaN (t['gsx$緯度']['$t']) && !isNaN (t['gsx$經度']['$t']) && t['gsx$經度']['$t'] > 21.8 && t['gsx$經度']['$t'] < 25.6 && t['gsx$緯度']['$t'] > 119.1 && t['gsx$緯度']['$t'] < 122.6 && t['gsx$範圍']['$t'] > 10 && t['gsx$範圍']['$t'] < 1000;
+        }).map (function (t) {
           return {
             id: (t['gsx$id']['$t'] < 99 ? t['gsx$id']['$t'] < 9 ? '00' : '0' : '') + t['gsx$id']['$t'],
             radius: parseFloat (t['gsx$範圍']['$t']),
