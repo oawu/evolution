@@ -2099,3 +2099,40 @@ section {
     width: 100%;
   }
 }
+
+.poke_iv #qr {
+  position: fixed;
+  right: 10px;
+  top: calc(50% - 200px / 2);
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(39, 40, 34, .20);
+  @include border-radius(2px);
+  @include box-shadow(0 0 5px rgba(0, 0, 0, .15));
+  z-index: 100;
+
+  img {
+    width: 100%;
+    @include border-radius(2px);
+  }
+
+  &:before {
+    position: absolute;
+    left: -180px;
+    top: calc(50% - 35px / 2);
+    display: inline-block;
+    width: 180px;
+    height: 35px;
+    font-size: 18px;
+    padding-right: 5px;
+    color: rgba(210, 76, 65, 1.00);
+    font-weight: bold;
+    content: '快點下載吧！ \e095';
+    text-align: right;
+    font-family: 'icomoon', "Open sans", Comfortaa,'Helvetica Neue',Helvetica,Arial,'Hiragino Maru Gothic ProN','メイリオ','ヒラギノ丸ゴ ProN W4','微軟正黑體',Meiryo,'Droid Sans';
+  }
+  @media screen and (min-width: 0) and (max-width: #{1200px - 1px}) {
+    display: none;
+  }
+}
