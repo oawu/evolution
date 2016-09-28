@@ -18,26 +18,8 @@
 
   @include font-smoothing(antialiased);
 }
-.icon-pin-alt:before {
-  content: "\e900";
-}
-.icon-user:before {
-  content: "\e902";
-}
-.icon-search:before {
-  content: "\e986";
-}
-.icon-mail-forward:before {
-  content: "\f064";
-}
-.icon-share:before {
-  content: "\f064";
-}
-.icon-github:before {
-  content: "\f09b";
-}
-.icon-android:before {
-  content: "\f17b";
+.icon-pets:before {
+  content: "\e904";
 }
 .icon-arrow-right:before {
   content: "\e095";
@@ -51,12 +33,32 @@
 .icon-menu:before {
   content: "\e120";
 }
+.icon-pin-alt:before {
+  content: "\e900";
+}
 .icon-chat-3:before {
   content: "\e901";
 }
+.icon-user:before {
+  content: "\e902";
+}
+.icon-select-arrows:before {
+  content: "\e903";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-share:before {
+  content: "\f064";
+}
+.icon-github:before {
+  content: "\f09b";
+}
+.icon-android:before {
+  content: "\f17b";
+}
 
-
-
+$changeWidth: 900px;
 
 * {
   &, &:after, &:before {
@@ -99,7 +101,7 @@ html {
       }
     }
 
-    @media screen and (min-width: 0px) and (max-width: #{$mediaMobileWidth - 1px}) {
+    @media screen and (min-width: 0px) and (max-width: #{$changeWidth - 1px}) {
       &.s {
         > aside {
           left: 0;
@@ -1219,7 +1221,7 @@ body > header {
         font-size: 16px;
         line-height: $headerHeight - 2px - 5px - 2px;
         margin-right: 5px;
-        @media screen and (min-width: 0px) and (max-width: #{$mediaMobileWidth - 1px}) {
+        @media screen and (min-width: 0px) and (max-width: #{$changeWidth - 1px}) {
           display: none;
         }
       }
@@ -1283,7 +1285,7 @@ body > header {
     }
   }
 
-  @media screen and (min-width: 0px) and (max-width: #{$mediaMobileWidth - 1px}) {
+  @media screen and (min-width: 0px) and (max-width: #{$changeWidth - 1px}) {
     > div {
       > *:first-child {
         display: inline-block;
@@ -1321,7 +1323,7 @@ body > aside {
   @include box-shadow(0 0 5px 1px rgba(39, 40, 34, .3), 1px 0 1px rgba(39, 40, 34, .3));
   @include opacity(0);
   @include transition(left .3s, opacity .3s);
-  @media screen and (min-width: $mediaMobileWidth) {
+  @media screen and (min-width: $changeWidth) {
     display: none;
   }
 
@@ -1427,13 +1429,13 @@ body > aside {
     @include transition(all .3s);
     @include transition(right .3s, opacity .3s);
 
-    @media screen and (min-width: $mediaMobileWidth) {
+    @media screen and (min-width: $changeWidth) {
       display: none;
     }
   }
 }
 
-#maps {
+#stops, #maps {
   position: fixed !important;
   top: 0;
   left: 0;
@@ -1451,7 +1453,7 @@ body > aside {
   .gm-style-cc {
     display: none;
   }
-  .maps {
+  .stops, .maps {
     position: absolute;
     top: 0;
     left: 0;
@@ -1530,13 +1532,145 @@ body > aside {
       cursor: pointer;
     }
     > div {
-      height: calc(100% - 40px);
+      height: calc(100% - 40px - 2px);
       overflow: auto;
     }
   }
 }
 
-#maps_spreadsheets_link_add_panel, #maps_comments_panel {
+#maps_stop_gym_panel {
+  &.gym .wrapper .panel_content .left {
+    &:before {
+      background-color: rgba(253, 217, 0, 1.00);
+    }
+    .img {
+      border: 10px solid rgba(253, 217, 0, 1.00);
+    }
+  }
+  .wrapper {
+    top: calc(50% - 305px / 2);
+    left: calc(50% - 500px / 2);
+    width: 500px;
+    height: 305px;
+
+    @media screen and (min-width: 0) and (max-width: #{400px - 1px}) {
+      top: calc(50% - 230px / 2);
+      height: 230px;
+    }
+    h4 {
+      margin: 0;
+      padding: 10px 5px;
+      border-bottom: 1px solid rgba(39, 40, 34, .2);
+      background-color: #f3f3f3;
+      margin-bottom: 20px;
+      @include border-top-radius(3px);
+    }
+    a {
+      @include a;
+    }
+    > a {
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      border-top: 1px solid rgba(39, 40, 34, .1);
+      cursor: pointer;
+    }
+    .panel_content {
+      @include clearfix();
+      
+      .left, .right {
+        float: left;
+        display: inline-block;
+        width: 50%;
+        height: 200px;
+      }
+      .left {
+        position: relative;
+        text-align: center;
+        @include animation(stop_rotate 3s infinite);
+
+        &:before {
+          content: '';
+          position: absolute;
+          left: calc(50% - 10px / 2);
+          bottom: 35px;
+          display: inline-block;
+          width: 10px;
+          height: 15px + 5px;
+          background-color: rgba(29, 145, 254, 1.00);
+          @include border-bottom-radius(50%);
+        }
+        .img {
+          display: block;
+          width: 150px;
+          height: 150px;
+          margin: 0 auto;
+          border: 10px solid rgba(29, 145, 254, 1.00);
+          @include border-radius(50%);
+        }
+        .stop-name {
+          position: relative;
+          display: inline-block;
+          padding: 0 20px;
+          width: 100%;
+          height: 35px;
+          line-height: 35px - 2px;
+          margin-top: 15px;
+          @include overflow-docx3();
+
+          @include background-image(radial-gradient(50% 50%, rgba(0, 0, 0, .2) 0px, rgba(0, 0, 0, 0) 100%));
+          background-repeat: no-repeat;
+          background-position: 50% 10px;
+        }
+      }
+      .right {
+        text-align: left;
+
+        h5 {
+          display: block;
+          @include overflow-docx3();
+          padding-bottom: 10px;
+          padding-left: 5px;
+          padding-right: 5px;
+          border-bottom: 1px dashed rgba(233, 234, 233, 1.00);
+          margin-top: 30px;
+        }
+        .lat, .lng, .address {
+          font-size: 13px;
+          height: 28px;
+          line-height: 28px - 2px;
+          padding: 0 5px;
+          @include overflow-docx3();
+
+          &:before {
+            content: attr(data-title);
+            display: inline-block;
+            font-size: 14px;
+          }
+          &:empty {
+            &:before {
+              content: attr(data-title) '讀取中..';
+              color: rgba(175, 175, 175, 1.00);
+            }
+          }
+        }
+        .address {
+          margin-top: 10px;
+
+          &:not(:empty) {
+            margin-left: -20px;
+            width: calc(100% + 20px);
+          }
+        }
+      }
+    }
+  }
+}
+#maps_loading, #maps_stop_gym_panel, #maps_spreadsheets_link_add_panel, #maps_comments_panel {
   position: fixed;
   top: -100%;
   left: 0;
@@ -1578,10 +1712,6 @@ body > aside {
     }
   }
 }
-#maps_comments {
-  @include button;
-  top: 123px + $headerHeight;
-}
 #maps_spreadsheets_link_add {
   @include button('pink');
   top: 80px + $headerHeight;
@@ -1595,6 +1725,58 @@ body > aside {
 
   &.show {
     display: inline-block;
+  }
+}
+
+#maps_stop_count, #maps_gym_count {
+  @include a;
+
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  display: none;
+
+  height: 35px;
+  line-height: 35px - 2px;
+  font-size: 13px;
+  padding: 0 10px;
+  border: 1px solid rgba(39, 40, 34, .25);
+  background-color: #f8f8f8;
+  z-index: 2;
+  @include border-radius(2px);
+
+  @media screen and (min-width: 0) and (max-width: #{$mediaMobileWidth - 1px}) {
+    font-size: 10px;
+    height: 30px;
+    line-height: 30px - 2px;
+  }
+  &.show {
+    display: inline-block;
+  }
+}
+#maps_gym_count {
+  bottom: 5px + 35px + 5px;
+
+  @media screen and (min-width: 0) and (max-width: #{$mediaMobileWidth - 1px}) {
+    bottom: 5px + 30px + 5px;
+  }
+}
+#maps_comments {
+  @include button('orange');
+  top: 80px + $headerHeight + 30px + 13px;
+
+}
+#stops #maps_comments {
+  top: auto;
+  right: auto;
+
+  left: 5px;
+  bottom: 5px + (35px + 5px) * 2;
+
+  @media screen and (min-width: 0) and (max-width: #{$mediaMobileWidth - 1px}) {
+    bottom: 5px + (30px + 5px) * 2;
+    font-size: 13px;
+    padding: 4px 15px;
   }
 }
 #maps_spreadsheets_link {
@@ -1613,7 +1795,7 @@ body > aside {
   z-index: 2;
   @include border-radius(2px);
 }
-#maps_select {
+#maps #maps_select {
   position: absolute;
   top: 45px + $headerHeight;
   right: 5px;
@@ -1638,6 +1820,84 @@ body > aside {
   }
 }
 
+#stops #maps_select {
+  position: absolute;
+  top: 5px + $headerHeight;
+  right: 5px;
+  display: none;
+  padding-right: 30px;
+  z-index: 2;
+  border: 1px solid rgba(39, 40, 34, .25);
+  background-color: rgba(248, 248, 248, 1.00);
+  @include border-radius (3px);
+
+
+  &.show {
+    display: inline-block;
+  }
+  &:before {
+    content: "\e903";
+    font-family: 'icomoon', "Open sans", Comfortaa,'Helvetica Neue',Helvetica,Arial,'Hiragino Maru Gothic ProN','メイリオ','ヒラギノ丸ゴ ProN W4','微軟正黑體',Meiryo,'Droid Sans';
+
+    position: absolute;
+    right: 5px;
+    top: 5px;
+
+    display: inline-block;
+    text-align: center;
+    width: 30px - 5px - 5px;
+    height: 30px - 5px - 5px;
+    line-height: 30px - 5px - 5px;
+  }
+
+  select {
+    padding: 5px 10px;
+    font-size: 16px;
+    height: 30px;
+    max-width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0);
+  
+
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    
+    &:focus {
+      outline: 0;
+      border-color: rgba(0, 0, 0, 0);
+    }
+  }
+}
+#maps_loading {
+
+  .wrapper {
+    top: calc(50% - 130px / 2);
+    left: calc(50% - 500px / 2);
+    width: 500px;
+    height: 130px;
+    @media screen and (min-width: 0) and (max-width: #{400px - 1px}) {
+      top: calc(50% - 130px / 2);
+      height: 130px;
+    }
+    @media screen and (min-width: 0) and (max-width: #{960px - 1px}) {
+      left: 20px;
+      width: calc(100% - 40px);
+    }
+    h4 {
+      margin: 0;
+      padding: 10px;
+      border-bottom: 1px solid rgba(39, 40, 34, .2);
+      background-color: #f3f3f3;
+      margin-bottom: 20px;
+      text-align: left;
+
+      @include border-top-radius(3px);
+    }
+    div {
+      padding: 10px;
+    }
+  }
+}
 
 
 #container.about {
@@ -2134,5 +2394,13 @@ section {
   }
   @media screen and (min-width: 0) and (max-width: #{1200px - 1px}) {
     display: none;
+  }
+}
+@include keyframes(stop_rotate){
+  0% {
+    @include rotateY(0);
+  }
+  100% {
+    @include rotateY(360deg);
   }
 }
