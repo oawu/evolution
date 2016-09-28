@@ -1554,8 +1554,8 @@ body > aside {
     height: 305px;
 
     @media screen and (min-width: 0) and (max-width: #{400px - 1px}) {
-      top: calc(50% - 230px / 2);
-      height: 230px;
+      top: calc(50% - 305px / 2);
+      height: 305px;
     }
     h4 {
       margin: 0;
