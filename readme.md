@@ -7,7 +7,7 @@
 
 <br/>
 ## 說明
-這是一個 Pokémon Go 進化後 CP 推測工具，可以快速查詢寶可夢進化後的 CP 範圍值，同時藉由網友互助回報而建立的全台寶可夢巢穴位置，讓大家可以查詢各精靈在台灣的分佈，若大家想要共同編輯巢穴文件可與網站作者聯絡。
+這是一個 Pokémon Go 進化後 CP 推測工具，可以快速查詢寶可夢進化後的 CP 範圍值，同時藉由網友互助回報而建立的全台寶可夢巢穴位置，讓大家可以查詢各精靈在台灣的分佈，若大家想要共同編輯巢穴文件可與網站作者聯絡，同時也可以查詢全台灣的補給站、道館的分佈。
 
 若要進一步的查詢各精靈的精準數值的話，可以使用 PokeIV小助手 來協助管理、計算數值，PokeIV小助手 不僅可以查詢個體值(IV)外，還可以設定快速進化、估算進化值.. 等功能，PokeIV小助手 同時也修改了被官網軟鎖得疑慮，經不同演算法大大減低風險！
 
@@ -23,5 +23,6 @@
 * [巢穴地圖](http://works.ioa.tw/evolution/maps.html) 的數據目前放置在 [Google 文件](https://docs.google.com/spreadsheets/d/1fMYgcbQV0haZcoKTdUYZaoorKaFCl8cFIF0aD4KDpHM/edit#gid=0) 上，藉由 Pokémon Go 同好玩家們共同編輯。
 * 若想共同編輯 [巢穴地圖 Google 文件](https://docs.google.com/spreadsheets/d/1fMYgcbQV0haZcoKTdUYZaoorKaFCl8cFIF0aD4KDpHM/edit#gid=0) 的話，歡迎與 [網站作者](http://www.ioa.tw/) 聯絡，亦或者發 E-Mail(<comdan66@gmail.com>) 給他！
 * 網頁上的查詢都是 HTML、JavaScript 前端檔案處理，所以後端並不會存取任何使用者的查詢資料喔！
+* 補給站、道館分佈地圖，是作者、小編們踏遍全台灣收集校正的！若是各位大大們想引用的話，請標註出處 [Go Evolution！](http://works.ioa.tw/evolution/)
 
 
