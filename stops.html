@@ -12,10 +12,10 @@
     <meta name="author" content="吳政賢(OA Wu)" />
 
     <meta name="keywords" content="Pokémon Go, 進化查詢, 台灣巢穴" />
-    <meta name="description" content="這是一個 Pokémon Go 進化後 CP 推測工具，可以快速查詢寶可夢進化後的 CP 範圍值，同時藉由網友互助回報而建立的全台寶可夢巢穴位置，讓大家可以查詢各精靈在台灣的分佈，若大家想要共同編輯巢穴文件可與網站作者聯絡，同時也可以查詢全台灣的補給站、道館的分佈。" />
+    <meta name="description" content="這是一個 Pokémon Go 進化後 CP 推測工具，可以快速查詢寶可夢進化後的 CP 範圍值，也可以查詢全台灣的補給站、道館的分佈，同時藉由網友互助回報而建立的全台寶可夢巢穴位置，讓大家可以查詢各精靈在台灣的分佈，若大家想要共同編輯巢穴文件可與網站作者聯絡。" />
     <meta property="og:site_name" content="Go Evolution！" />
-    <meta property="og:title" content="補給站地圖 - 全台灣各精靈的巢穴位置" />
-    <meta property="og:description" content="這是一個PokémonGo進化後CP推測工具，可以快速查詢寶可夢進化後的CP範圍值，同時藉由網友互助回報而建立的全台寶可夢巢穴位置，讓大家可以查詢各精靈在台灣的分佈，若大家想要共同編輯巢穴文件可與網站作者聯絡，同時也可以查詢全台灣的補給站、道館的分佈。" />
+    <meta property="og:title" content="補給站地圖 - 全台灣補給站、道館位置" />
+    <meta property="og:description" content="這是一個PokémonGo進化後CP推測工具，可以快速查詢寶可夢進化後的CP範圍值，也可以查詢全台灣的補給站、道館的分佈，同時藉由網友互助回報而建立的全台寶可夢巢穴位置，讓大家可以查詢各精靈在台灣的分佈，若大家想要共同編輯巢穴文件可與網站作者聯絡。" />
     <meta property="og:url" content="http://works.ioa.tw/evolution/stops.html" />
 
     <meta property="fb:admins" content="100000100541088" />
@@ -27,8 +27,8 @@
     <meta property="og:type" content="article" />
     <meta property="article:author" content="https://www.facebook.com/comdan66" />
     <meta property="article:publisher" content="https://www.facebook.com/comdan66" />
-    <meta property="article:modified_time" content="2016-09-01T21:07:41+02:00" />
-    <meta property="article:published_time" content="2016-09-01T21:07:41+02:00" />
+    <meta property="article:modified_time" content="2016-10-04T18:38:47+08:00" />
+    <meta property="article:published_time" content="2016-10-04T18:38:47+08:00" />
 
     <meta property="og:image" content="http://works.ioa.tw/evolution/img/og/stops.png" alt="Pokémon Go 進化後 CP 推測工具" />
     <meta property="og:image:type" content="image/png" />
@@ -38,10 +38,10 @@
     <link rel="canonical" href="http://works.ioa.tw/evolution/stops.html" />
     <link rel="alternate" href="http://works.ioa.tw/evolution/stops.html" hreflang="zh-Hant" />
 
-    <link href="css/public.css?v=5" rel="stylesheet" type="text/css" />
+    <link href="css/public.css?v=10" rel="stylesheet" type="text/css" />
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW" language="javascript" type="text/javascript" ></script>
-    <script src="js/public.js?v=5" language="javascript" type="text/javascript" ></script>
+    <script src="js/public.js?v=10" language="javascript" type="text/javascript" ></script>
 
   </head>
   <body lang="zh-tw" class='maps'>
@@ -70,10 +70,11 @@
       <div id='maps_select'>
         <select>
           <option value='all'>全部顯示</option>
-          <option value='stops'>補給站</option>
-          <option value='gyms'>道館</option>
+          <option value='1'>補給站</option>
+          <option value='0'>道館</option>
         </select>
       </div>
+      <a id='my_position'>我的位置</a>
     </div>
 
     <div id='maps_comments_panel'>
@@ -116,7 +117,7 @@
       <ul>
         <li><a class='icon-search' href='index.html'>進化查詢</a></li>
         <li><a class='icon-pets' href='maps.html'>巢穴地圖</a></li>
-        <li><a class='icon-pin-alt' href='maps.html'>補給站地圖</a></li>
+        <li><a class='icon-pin-alt' href='stops.html'>補給站地圖</a></li>
         <li><a class='icon-android' href='poke_iv.html'>PokeIV小助手</a></li>
         <li><a class='icon-chat-3' href='about.html'>介紹說明</a></li>
       </ul>

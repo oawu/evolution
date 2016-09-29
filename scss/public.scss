@@ -1637,7 +1637,7 @@ body > aside {
           padding-left: 5px;
           padding-right: 5px;
           border-bottom: 1px dashed rgba(233, 234, 233, 1.00);
-          margin-top: 30px;
+          margin-top: 20px;
         }
         .lat, .lng, .address {
           font-size: 13px;
@@ -1794,6 +1794,25 @@ body > aside {
   background-color: #f8f8f8;
   z-index: 2;
   @include border-radius(2px);
+}
+#my_position {
+  @include button;
+  position: absolute;
+  
+  z-index: 3;
+  display: none;
+
+  &.show {
+    display: inline-block;
+  }
+}
+#maps #my_position {
+  left: 5px;
+  bottom: 5px;
+}
+#stops #my_position {
+  top: 5px + $headerHeight + 30px + 8px;
+  right: 5px;
 }
 #maps #maps_select {
   position: absolute;
