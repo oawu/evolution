@@ -406,12 +406,13 @@ $(function () {
       }).find ('option[value="' + window.storages.selected.get () + '"]').attr ('selected', true);
 
       window.vars.isLoadStops = false;
-      // this.loadStopsGyms ();
+      this.loadStopsGyms ();
       window.vars.$.mapsLoading.removeClass ('show');
     },
     loadStopsGyms: function () {
-      var bounds = window.vars.stopsGyms.getBounds (),
-          northEast = bounds.getNorthEast (),
+      var bounds = window.vars.stopsGyms.getBounds ();
+      if (typeof bounds == 'undefined') return false;
+      var northEast = bounds.getNorthEast (),
           southWest = bounds.getSouthWest (),
           sa = southWest.lat (),
           na = northEast.lat (),
