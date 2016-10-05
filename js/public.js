@@ -72,8 +72,6 @@ $(function () {
     markers: [],
 
     maxZoom: 16,
-    // nowStops: [],
-    // nowGyms: [],
     imgUrls: {},
     isLoadStops: true,
     myPosition: null,
@@ -346,7 +344,7 @@ $(function () {
       if (params && params.gid && params.pid) openPhotoSwipe (params.pid - 1,  $pswp, $obj.eq (params.gid - 1), true, true);
     },
     getStopDetail: function (obj, callback) {
-      var imgUrl = 'api/' + (obj.isp ? 'stops' : 'gyms') + '/' + Math.floor (obj.id / 1000) + '.json';
+      var imgUrl = 'api/' + (obj.isp ? 's' : 'g') + '/' + Math.floor (obj.id / 1000) + '.json';
       var d4Data = [obj.isp ? '補給站' : '道館', 'img/d4.png'];
 
       if (typeof window.vars.imgUrls[imgUrl] !== 'undefined' && window.vars.imgUrls[imgUrl]) callback && callback (window.vars.imgUrls[imgUrl][obj.id] !== 'undefined' && window.vars.imgUrls[imgUrl][obj.id] ? window.vars.imgUrls[imgUrl][obj.id] : d4Data);
@@ -409,6 +407,11 @@ $(function () {
       this.loadStopsGyms ();
       window.vars.$.mapsLoading.removeClass ('show');
     },
+    to2D: function (l, c) {
+      var arr = [];
+      for (var i = 0; i < l.length; i++) if (typeof arr[parseInt (i / c, 10)] == 'undefined') arr[parseInt (i / c, 10)] = [l[i]]; else arr[parseInt (i / c, 10)][i % c] = l[i];
+      return arr;
+    },
     loadStopsGyms: function () {
       var bounds = window.vars.stopsGyms.getBounds ();
       if (typeof bounds == 'undefined') return false;
@@ -417,7 +420,7 @@ $(function () {
           sa = southWest.lat (),
           na = northEast.lat (),
           sn = southWest.lng (),
-          nn = southWest.lng () > 0 && northEast.lng () < 0 ? 180 + Math.abs (northEast.lng ()) : northEast.lng (),
+          nn = southWest.lng () > northEast.lng () ? 180 + Math.abs (northEast.lng ()) : northEast.lng (),
           zoom = window.vars.stopsGyms.zoom;
           
       if (window.vars.isLoadStops) return false;
@@ -523,16 +526,17 @@ $(function () {
     },
     stopsZooms: {
       key: 'pokemonGo.zooms',
+      cacheTime: 60 * 60, // sec
       get: function (version, callback) {
         var zooms = window.func.getStorage (this.key);
-        if (zooms && zooms.v == version) return callback && callback (zooms.d);
+        if (zooms && (zooms.v == version) && (new Date ().getTime () - zooms.t < this.cacheTime * 1000)) return callback && callback (zooms.d);
 
-        $.when ($.get ('api/zooms.json?t=' + new Date ().getTime ())).done (function (result) {
+        $.when ($.get ('api/z.json?t=' + new Date ().getTime ())).done (function (result) {
           this.set (version, result);
           callback && callback (result);
         }.bind (this));
       },
-      set: function (version, zooms) { window.func.setStorage (this.key, {v: version, d: zooms}); return this; },
+      set: function (version, zooms) { window.func.setStorage (this.key, {v: version, t: new Date ().getTime (), d: zooms}); return this; },
     },
   };
 
@@ -557,10 +561,9 @@ $(function () {
   if (window.vars.$.stops.length)
     google.maps.event.addDomListener (window, 'load', function () {
       var last = window.storages.mapsLast.get ();
-      window.vars.stopsGyms = new google.maps.Map (window.vars.$.stops.get (0), { zoom: last.zoom, center: new google.maps.LatLng (last.lat, last.lng), zoomControl: true, scrollwheel: true, scaleControl: true, mapTypeControl: false, navigationControl: true, streetViewControl: false, disableDoubleClickZoom: true});
+      window.vars.stopsGyms = new google.maps.Map (window.vars.$.stops.get (0), { zoom: last.zoom, center: new google.maps.LatLng (last.lat, last.lng)});
       window.vars.stopsGyms.mapTypes.set ('map_style', new google.maps.StyledMapType ([{featureType: 'all', stylers: [{ visibility: 'on' }]}, {featureType: 'administrative', stylers: [{ visibility: 'simplified' }]}, {featureType: 'landscape', stylers: [{ visibility: 'simplified' }]}, {featureType: 'poi', stylers: [{ visibility: 'simplified' }]}, {featureType: 'road', stylers: [{ visibility: 'simplified' }]}, {featureType: 'road.arterial', stylers: [{ visibility: 'simplified' }]}, {featureType: 'transit', stylers: [{ visibility: 'simplified' }]}, {featureType: 'water', stylers: [{ color: '#b3d1ff', visibility: 'simplified' }]}, {elementType: "labels.icon", stylers:[{ visibility: 'off' }]}]));
       window.vars.stopsGyms.setMapTypeId ('map_style');
-  
 
       window.vars.stopsGyms.addListener ('idle', function () {
         window.func.loadStopsGyms ();
@@ -589,11 +592,16 @@ $(function () {
         });
       });
 
-      window.storages.stopsZooms.get (1, function (result) {
-        window.vars.zooms = result.map (function (t) { return t.map (function (u) { return { id: u[0], lat: u[1], lng: u[2], isp: u[3], cs: u[4], }; }); });
 
-        $.when ($.get ('api/alls.json?t=' + new Date ().getTime ())).done (function (result) {
-          window.vars.alls = result.map (function (t) { return { id: t[0], lat: t[1], lng: t[2], isp: t[3] }; });
+      window.storages.stopsZooms.get (1, function (result) {
+        window.vars.zooms = result.map (function (t) {
+          return window.func.to2D (t, 5).map (function (u) {
+            return { id: u[0], lat: u[1] + 20, lng: u[2] + 120, isp: u[3], cs: u[4] };
+          });
+        });
+
+        $.when ($.get ('api/a.json?t=' + new Date ().getTime ())).done (function (result) {
+          window.vars.alls = window.func.to2D (result, 4).map (function (t) { return { id: t[0], lat: t[1] + 20, lng: t[2] + 120, isp: t[3] }; });
           window.vars.$.mapsStopCount.text ('總共 ' + window.func.numberFormat (window.vars.alls.filter (function (t) { return t.isp; }).length) + ' 個補給站！').addClass ('show');
           window.vars.$.mapsGymCount.text ('總共 ' + window.func.numberFormat (window.vars.alls.filter (function (t) { return !t.isp; }).length) + ' 個道館！').addClass ('show');
         });
@@ -605,7 +613,7 @@ $(function () {
   if (window.vars.$.maps.length)
     google.maps.event.addDomListener (window, 'load', function () {
       var last = window.storages.mapsLast.get ();
-      window.vars.maps = new google.maps.Map (window.vars.$.maps.get (0), { zoom: last.zoom, center: new google.maps.LatLng (last.lat, last.lng), zoomControl: true, scrollwheel: true, scaleControl: true, mapTypeControl: false, navigationControl: true, streetViewControl: false, disableDoubleClickZoom: true});
+      window.vars.maps = new google.maps.Map (window.vars.$.maps.get (0), { zoom: last.zoom, center: new google.maps.LatLng (last.lat, last.lng)});
       window.vars.maps.mapTypes.set ('map_style', new google.maps.StyledMapType ([{featureType: 'all', stylers: [{ visibility: 'on' }]}, {featureType: 'administrative', stylers: [{ visibility: 'simplified' }]}, {featureType: 'landscape', stylers: [{ visibility: 'simplified' }]}, {featureType: 'poi', stylers: [{ visibility: 'simplified' }]}, {featureType: 'road', stylers: [{ visibility: 'simplified' }]}, {featureType: 'road.arterial', stylers: [{ visibility: 'simplified' }]}, {featureType: 'transit', stylers: [{ visibility: 'simplified' }]}, {featureType: 'water', stylers: [{ color: '#b3d1ff', visibility: 'simplified' }]}, {elementType: "labels.icon", stylers:[{ visibility: 'off' }]}]));
       window.vars.maps.setMapTypeId ('map_style');
       
