@@ -77,7 +77,7 @@ $(function () {
     imgUrls: {},
     isLoadStops: true,
     myPosition: null,
-    stopsVersion: 1,
+    stopsVersion: 2,
   };
   window.vars.evolutions = window.vars.pokemons.filter (function (t) { return typeof t.from !== 'undefined'; });
 
