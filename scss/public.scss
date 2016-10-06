@@ -2511,6 +2511,7 @@ section {
       height: calc(100% - 50px - 52px);
       margin-bottom: 1px;
       overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
       
       &::-webkit-scrollbar-thumb {
         background-color: rgba(0, 0, 0, 1);
