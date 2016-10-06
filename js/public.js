@@ -75,6 +75,7 @@ $(function () {
     imgUrls: {},
     isLoadStops: true,
     myPosition: null,
+    stopsVersion: 1,
   };
   window.vars.evolutions = window.vars.pokemons.filter (function (t) { return typeof t.from !== 'undefined'; });
 
@@ -525,13 +526,27 @@ $(function () {
       }
     },
     stopsZooms: {
-      key: 'pokemonGo.zooms',
+      key: 'pokemonGo.stops.zooms',
       cacheTime: 60 * 60, // sec
       get: function (version, callback) {
         var zooms = window.func.getStorage (this.key);
         if (zooms && (zooms.v == version) && (new Date ().getTime () - zooms.t < this.cacheTime * 1000)) return callback && callback (zooms.d);
 
         $.when ($.get ('api/z.json?t=' + new Date ().getTime ())).done (function (result) {
+          this.set (version, result);
+          callback && callback (result);
+        }.bind (this));
+      },
+      set: function (version, zooms) { window.func.setStorage (this.key, {v: version, t: new Date ().getTime (), d: zooms}); return this; },
+    },
+    stopsAlls: {
+      key: 'pokemonGo.stops.alls',
+      cacheTime: 60 * 60, // sec
+      get: function (version, callback) {
+        var zooms = window.func.getStorage (this.key);
+        if (zooms && (zooms.v == version) && (new Date ().getTime () - zooms.t < this.cacheTime * 1000)) return callback && callback (zooms.d);
+
+        $.when ($.get ('api/a.json?t=' + new Date ().getTime ())).done (function (result) {
           this.set (version, result);
           callback && callback (result);
         }.bind (this));
@@ -556,7 +571,6 @@ $(function () {
     window.vars.$.searchInput.keyup (function () { window.func.sort ($(this).val ()); });
     window.func.sort ();
   }
-
 
   if (window.vars.$.stops.length)
     google.maps.event.addDomListener (window, 'load', function () {
@@ -592,21 +606,22 @@ $(function () {
         });
       });
 
+      window.storages.stopsAlls.get (window.vars.stopsVersion, function (result) {
+        var tmp = {};
+        window.vars.alls = window.func.to2D (result, 4).map (function (t) { var obj = { id: t[0], lat: parseFloat (t[1]) + 20, lng: parseFloat (t[2]) + 120, isp: t[3] }; tmp[obj.id + '_' + obj.isp] = obj; return obj; });
+        window.vars.$.mapsStopCount.text ('總共 ' + window.func.numberFormat (window.vars.alls.filter (function (t) { return t.isp; }).length) + ' 個補給站！').addClass ('show');
+        window.vars.$.mapsGymCount.text ('總共 ' + window.func.numberFormat (window.vars.alls.filter (function (t) { return !t.isp; }).length) + ' 個道館！').addClass ('show');
 
-      window.storages.stopsZooms.get (1, function (result) {
-        window.vars.zooms = result.map (function (t) {
-          return window.func.to2D (t, 5).map (function (u) {
-            return { id: u[0], lat: u[1] + 20, lng: u[2] + 120, isp: u[3], cs: u[4] };
+        window.storages.stopsZooms.get (window.vars.stopsVersion, function (result) {
+          window.vars.zooms = result.map (function (t) {
+            return window.func.to2D (t, 3).map (function (u) {
+              return { id: u[0], isp: u[1], cs: u[2], lat: tmp[u[0] + '_' + u[1]].lat, lng: tmp[u[0] + '_' + u[1]].lng };
+            });
           });
+          
+          tmp = null; delete tmp;
+          window.func.finishLoadStopsInfo ();
         });
-
-        $.when ($.get ('api/a.json?t=' + new Date ().getTime ())).done (function (result) {
-          window.vars.alls = window.func.to2D (result, 4).map (function (t) { return { id: t[0], lat: t[1] + 20, lng: t[2] + 120, isp: t[3] }; });
-          window.vars.$.mapsStopCount.text ('總共 ' + window.func.numberFormat (window.vars.alls.filter (function (t) { return t.isp; }).length) + ' 個補給站！').addClass ('show');
-          window.vars.$.mapsGymCount.text ('總共 ' + window.func.numberFormat (window.vars.alls.filter (function (t) { return !t.isp; }).length) + ' 個道館！').addClass ('show');
-        });
-
-        window.func.finishLoadStopsInfo ();
       });
     });
 
