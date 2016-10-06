@@ -1805,6 +1805,10 @@ body > aside {
 
   &.show {
     display: inline-block;
+
+    + * {
+      top: 5px + $headerHeight + 32px + 5px + 44px;
+    }
   }
 }
 #maps #my_position {
@@ -2460,7 +2464,7 @@ section {
     border: 1px solid rgba(156, 156, 153, 1.00);
     background-color: rgba(39, 40, 34, .75);
     top: 10%;
-    left: calc(50% - #{450px} / 2);
+    left: calc(50% - 450px / 2);
     height: 0;
     width: 450px;
 
