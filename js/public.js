@@ -587,7 +587,7 @@ $(function () {
       });
       window.vars.$.mapsCommentsPanel.find ('.cover, .wrapper > a').click (function () { window.vars.$.mapsCommentsPanel.toggleClass ('show'); });
       window.vars.$.mapsStopGymPanel.find ('.cover, .wrapper > a').click (function () { window.vars.$.mapsStopGymPanel.toggleClass ('show'); });
-      window.vars.$.tops.find ('.wrapper > .btns .share').click (function () { window.open ('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href + window.location.hash, '分享', 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,top=100,left=' + (window.screen ? Math.round (screen.width / 2 - 275) : 100)); });
+      window.vars.$.tops.find ('.wrapper > .btns .share').click (function () { window.open ('https://www.facebook.com/sharer/sharer.php?u=' + 'http://works.ioa.tw/evolution/tops.html', '分享', 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,top=100,left=' + (window.screen ? Math.round (screen.width / 2 - 275) : 100)); });
       window.vars.$.tops.find ('.cover, .wrapper > .btns .ok').click (function () { window.vars.$.tops.toggleClass ('show'); window.location.hash = ''; });
 
       $.get ('api/t.json?t=' + new Date ().getTime (), function (data) {
