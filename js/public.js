@@ -588,8 +588,8 @@ $(function () {
       });
       window.vars.$.mapsCommentsPanel.find ('.cover, .wrapper > a').click (function () { window.vars.$.mapsCommentsPanel.toggleClass ('show'); });
       window.vars.$.mapsStopGymPanel.find ('.cover, .wrapper > a').click (function () { window.vars.$.mapsStopGymPanel.toggleClass ('show'); });
-      window.vars.$.tops.find ('.wrapper > .btns .share').click (function () { window.open ('https://www.facebook.com/sharer/sharer.php?u=' + 'http://works.ioa.tw/evolution/tops.html', '分享', 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,top=100,left=' + (window.screen ? Math.round (screen.width / 2 - 275) : 100)); });
-      window.vars.$.tops.find ('.cover, .wrapper > .btns .ok').click (function () { if (window.vars.$.topsHidden.length) return window.location.assign ('http://works.ioa.tw/evolution/stops.html'); else window.vars.$.tops.toggleClass ('show'); window.location.hash = ''; });
+      window.vars.$.tops.find ('.wrapper > .btns .share').click (function () { window.open ('https://www.facebook.com/sharer/sharer.php?u=' + 'https://works.ioa.tw/evolution/tops.html', '分享', 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,top=100,left=' + (window.screen ? Math.round (screen.width / 2 - 275) : 100)); });
+      window.vars.$.tops.find ('.cover, .wrapper > .btns .ok').click (function () { if (window.vars.$.topsHidden.length) return window.location.assign ('https://works.ioa.tw/evolution/stops.html'); else window.vars.$.tops.toggleClass ('show'); window.location.hash = ''; });
 
       $.get ('api/t.json?t=' + new Date ().getTime (), function (data) {
         window.vars.$.tops.find ('.panel_content').empty ().append (window.func.to2D (data, 3).map (function (t) {
